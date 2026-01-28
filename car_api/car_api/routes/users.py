@@ -1,5 +1,6 @@
 from fastapi import APIRouter, status
 
+from car_api.db import USERS
 from car_api.schemas.users import (
     UserScreen,
     UserListPublicSchema,
@@ -22,6 +23,4 @@ async def create_user(user:UserScreen):
             status_code=status.HTTP_200_OK,
             response_model=UserListPublicSchema,)
 async def list_users():
-    return {"users": [
-            {"id": 1, "username": "luan", "email": "luan@gmail.com"},
-    ]}
+    return {"users": USERS}
