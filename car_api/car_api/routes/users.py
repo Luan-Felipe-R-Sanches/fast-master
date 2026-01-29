@@ -24,3 +24,10 @@ async def create_user(user:UserScreen):
             response_model=UserListPublicSchema,)
 async def list_users():
     return {"users": USERS}
+
+@router.put("/{user_id}",status_code=status.HTTP_200_OK, response_model=UserPublicSchema,)
+
+async def update_user(user_id: int, user: UserScreen):
+    user_with_id = UserPublicSchema(**user.model_dump(), id=user_id)
+    USERS[user_id - 1] = user_with_id
+    return user_with_id
